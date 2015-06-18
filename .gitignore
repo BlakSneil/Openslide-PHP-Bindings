@@ -1,6 +1,17 @@
+# SWIG intermediate files
+/openslide_wrap.c
+/openslide_wrap.o
+/php_openslide.h
+
 # SVS and TIFF samples
-/test.svs
-/test.tif
+/test/test.svs
+/test/test.tif
+/test/test1.svs
+/test/test1.tif
 
 # sample slide tiles folder
 /slide_files
+
+/other files
+
+/tiles

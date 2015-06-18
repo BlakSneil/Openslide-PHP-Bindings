@@ -1,7 +1,7 @@
 <?php
 // data richiesta deepzoom, estrae la tile rispettiva
 
-require "create_deepzoom_tile.php";
+require "../create_deepzoom_tile.php";
 
 $level = 10;
 $x = 0;
