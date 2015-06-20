@@ -3,11 +3,10 @@
 /openslide_wrap.o
 /php_openslide.h
 
-# SVS and TIFF samples
-/test/test.svs
-/test/test.tif
-/test/test1.svs
-/test/test1.tif
+# SVS samples
+/test/slide1.svs
+/test/slide2.svs
+/test/slide3.svs
 
 # sample slide tiles folder
 /slide_files

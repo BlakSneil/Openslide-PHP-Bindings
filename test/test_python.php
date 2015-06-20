@@ -2,13 +2,12 @@
 
 $level = 16;
 
-date_default_timezone_set('Europe/Rome');
-$start = new DateTime();
+$time_start = microtime(true);
 
 $i = 0;
 
-for ($x = 50; $x < 70; $x++) {
-	for ($y = 50; $y < 70; $y++) {
+for ($x = 0; $x < 20; $x++) {
+	for ($y = 0; $y < 20; $y++) {
 
 		echo "$i: requesting region for level $level with coordinates $x : $y\n";
 
@@ -21,12 +20,11 @@ for ($x = 50; $x < 70; $x++) {
 		curl_setopt($ch, CURLOPT_TIMEOUT, '3');
 		$content = trim(curl_exec($ch));
 		curl_close($ch);
-//		print $content . "\n";
 
 		$i += 1;
 	}
 }
 
-$end = new DateTime();
+$time_end = microtime(true);
 
-echo "The process for $i slides lasts " . $end->diff($start)->format("%s") . " seconds\n";
+echo "The process for $i slides lasts " . round(($time_end - $time_start) * 1000) . " milliseconds\n";

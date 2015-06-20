@@ -11,7 +11,7 @@ function createDeepZoomTile($level, $x, $y, $tileDim, $slidePath, $tilePath) {
         echo "Failed to open slide $slidePath: " . openslide_get_error($osr). ".\n";
         openslide_close($osr);
         die();
-    } else
+    }
 
 	// 1) estraggo dalla slide le dimensioni dei vari livelli
     $osrLevelCount = openslide_get_level_count($osr);

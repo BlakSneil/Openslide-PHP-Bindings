@@ -1,11 +1,13 @@
 <?php
 
+/* This test has the objective to */
+
 require "../create_deepzoom_tile.php";
 
-$level = 16;
-$tileSize = 256;
+$level = 0;
+$tileSize = 512;
 
-$slideName = "slide3";
+$slideName = "slide1";
 
 $slidePath = "$slideName.svs";
 
@@ -22,22 +24,26 @@ if (!file_exists($tileDir)) {
     mkdir($tileDir);
 }
 
+$osr = openslide_open($slidePath);
+
 $time_start = microtime(true);
 
 $i = 0;
 
-for ($x = 0; $x < 20; $x++) {
-	for ($y = 0; $y < 20; $y++) {
+$k = 256 / $tileSize;
 
-		$tileFilename = $x . "_" . $y . ".jpg";
+for ($x = 0; $x < (20 * $k); $x++) {
+	for ($y = 0; $y < (20 * $k); $y++) {
+
+		$regionX = $x * $tileSize;
+		$regionY = $y * $tileSize;
+
+		$tileFilename = $regionX . "_" . $regionY . ".jpg";
 		$tilePath = $tileDir . "/" . $tileFilename;
 
-		if (file_exists($tilePath)) {
-			echo "$i: reading file for level $level with coordinates $x : $y\n";
-		} else {
-			echo "$i: generating file for level $level with coordinates $x : $y\n";
-			createDeepZoomTile($level, $x, $y, $tileSize, $slidePath, $tilePath);
-		}
+		echo "$i: generating file for level $level with coordinates $regionX : $regionY\n";
+
+    	write_jpg($osr, $tilePath, $regionX, $regionY, $level, $tileSize, $tileSize, $tileSize, $tileSize);
 
 		$i += 1;
 	}
