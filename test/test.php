@@ -2,12 +2,15 @@
 
 require "../create_deepzoom_tile.php";
 
-$level = 16;
+$level = 15;
 $tileSize = 256;
 
-$slideName = "slide3";
+$slideName = "slide1";
 
-$slidePath = "$slideName.svs";
+$slideExtension = "svs";
+
+$slidePath = "slides/$slideName.$slideExtension";
+
 
 $tileDir = "tiles";
 if (!file_exists($tileDir)) {
@@ -21,6 +24,7 @@ $tileDir = $tileDir . "/" . $level;
 if (!file_exists($tileDir)) {
     mkdir($tileDir);
 }
+
 
 $time_start = microtime(true);
 

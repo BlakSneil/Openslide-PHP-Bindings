@@ -5,11 +5,13 @@
 require "../create_deepzoom_tile.php";
 
 $level = 0;
-$tileSize = 512;
+$tileSize = 256;
 
 $slideName = "slide1";
 
-$slidePath = "$slideName.svs";
+$slideExtension = "svs";
+
+$slidePath = "slides/$slideName.$slideExtension";
 
 $tileDir = "tiles";
 if (!file_exists($tileDir)) {

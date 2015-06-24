@@ -1,6 +1,6 @@
 <?php
 
-$level = 16;
+$level = 18;
 
 $time_start = microtime(true);
 
@@ -11,7 +11,7 @@ for ($x = 0; $x < 20; $x++) {
 
 		echo "$i: requesting region for level $level with coordinates $x : $y\n";
 
-		$qry_str = "/16/" . $x . "_" . $y . ".jpeg";
+		$qry_str = "/$level/" . $x . "_" . $y . ".jpeg";
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_URL, 'http://127.0.0.1:5000/slide_files' . $qry_str); 

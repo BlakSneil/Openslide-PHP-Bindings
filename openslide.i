@@ -38,9 +38,10 @@
 		
 		MagickWandGenesis();
 		
-		MagickResizeImage(m_wand, tile_w, tile_h, LanczosFilter, 1);
+		if (w != tile_w && h != tile_h)
+			MagickResizeImage(m_wand, tile_w, tile_h, LanczosFilter, 1);
 		
-		MagickSetImageCompressionQuality(m_wand, 95);
+		//MagickSetImageCompressionQuality(m_wand, 95);
 		
 		MagickWriteImage(m_wand, filePath);
 		

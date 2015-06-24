@@ -1,6 +1,6 @@
 <?php
 
-function createDeepZoomTile($level, $x, $y, $tileDim, $slidePath, $tilePath) {
+function createDeepZoomTile($level, $x, $y, $tileSize, $slidePath, $tilePath) {
 
     $osr = openslide_open($slidePath);
 
@@ -33,8 +33,9 @@ function createDeepZoomTile($level, $x, $y, $tileDim, $slidePath, $tilePath) {
 	// 2) calcolo il massimo livello N di deepzoom con la formula 2^(N)>=M, dove M dimensione massima della slide
     $maxDeepZoomLayer = ceil(log($osrLevelDimensions[0]['maxDim'], 2));
     //echo "MAX DEEPZOOM LAYER: $maxDeepZoomLayer\n";
-
-	// 3) calcolo la dimensione massima del livello deepzoom richiesto ($level) dividendo M per 2 finché da N non arrivo a $level
+    //die();
+	
+    // 3) calcolo la dimensione massima del livello deepzoom richiesto ($level) dividendo M per 2 finché da N non arrivo a $level
     $exp = $maxDeepZoomLayer - $level;
     $requiredLevelWidth = ceil($osrLevelDimensions[0]['width'] / pow(2, $exp));
     $requiredLevelHeight = ceil($osrLevelDimensions[0]['height'] / pow(2, $exp));
@@ -46,13 +47,16 @@ function createDeepZoomTile($level, $x, $y, $tileDim, $slidePath, $tilePath) {
     // TODO: migliorare, è poco efficiente
     $bestLevel = 0;
     for ($i = 1; $i < $osrLevelCount; $i++) {
-        if ($osrLevelDimensions[$i]['maxDim'] > max($requiredLevelWidth, $requiredLevelHeight))
+        if ($osrLevelDimensions[$i]['width'] >= $requiredLevelWidth && $osrLevelDimensions[$i]['height'] >= $requiredLevelHeight) {
             $bestLevel = $i;
+        } else {
+            break;
+        }
     }
     //echo "BEST LEVEL: $bestLevel\n";
 
     // 5) calcolo e aggiusto le dimensioni della tile, aggiungendo un pixel di sovrapposizione per le tile non di confine e stando attendo a non sforare le dimensioni del livello
-    $tileWidth = $tileDim;
+    $tileWidth = $tileSize;
     $tileX = $x * $tileWidth;
     if ($x > 0) {
         $tileX -= 1;
@@ -64,7 +68,7 @@ function createDeepZoomTile($level, $x, $y, $tileDim, $slidePath, $tilePath) {
         $tileWidth += 1;
     }
 
-    $tileHeight = $tileDim;
+    $tileHeight = $tileSize;
     $tileY = $y * $tileHeight;
     if ($y > 0) {
         $tileY -= 1;
@@ -90,8 +94,9 @@ function createDeepZoomTile($level, $x, $y, $tileDim, $slidePath, $tilePath) {
     $regionY = round($tileY * $osrLevelDimensions[0]['height'] / $requiredLevelHeight);
 
 
-    //echo "GETTING REGION: x=$regionX   y=$regionY   w=$regionWidth   h=$regionHeight\n";
+    //echo "GETTING REGION: x=$regionX   y=$regionY   w=$regionWidth   h=$regionHeight  of level $bestLevel\n";
 
+    //die();
 
     // 7) ritaglio la regione
     // TODO: png progressiva?
