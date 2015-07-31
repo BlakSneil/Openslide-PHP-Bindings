@@ -1,5 +1,7 @@
 # Openslide-PHP-Bindings
-PHP Bindings and other stuff for Openslide C Library.
+PHP Bindings and other stuff for [Openslide](http://openslide.org/) C Library.
+
+This work is designed and developed as Master Thesis in Computer Science under the supervision of prof. V. Della Mea, University of Udine, Italy, inside the Marie Curie AIDPATH Project.
 
 _The implementation (and much more the documentation) is at early stages._
 
