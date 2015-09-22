@@ -15,4 +15,8 @@ The code was tested under OS X Yosemite with PHP 5.5.20. I installed all three l
 
 Many thanks to _Gigabytes_ for his help.
 
+FURTHER WORK
+- generic makefile for a more interoperable installation
+- reducing dependencies from modules not already used by OpenSlide
+
 
